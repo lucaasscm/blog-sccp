@@ -77,6 +77,16 @@ class PostTest < ActiveSupport::TestCase
     assert_respond_to Post.new, :cover_image
   end
 
+  test "can attach a cover image" do
+    post = posts(:published_post)
+    post.cover_image.attach(
+      io: StringIO.new("fake image content"),
+      filename: "cover.jpg",
+      content_type: "image/jpeg"
+    )
+    assert post.cover_image.attached?
+  end
+
   test "has many post_tags" do
     assert_respond_to posts(:published_post), :post_tags
   end
