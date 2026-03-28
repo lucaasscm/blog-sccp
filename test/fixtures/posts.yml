@@ -5,6 +5,13 @@ published_post:
   user: one
   category: jogos
 
+another_published_post:
+  title: "Timão goleia o rival"
+  content: "Grande atuação do Corinthians na Neo Química Arena."
+  status: "published"
+  user: one
+  category: opiniao
+
 draft_post:
   title: "Prévia do próximo jogo"
   content: "O Corinthians se prepara para mais um desafio."

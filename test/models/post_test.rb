@@ -57,12 +57,14 @@ class PostTest < ActiveSupport::TestCase
   end
 
   test "published scope returns only published posts" do
-    assert Post.published.all?(&:published?)
+    assert_includes Post.published, posts(:published_post)
+    assert_not_includes Post.published, posts(:draft_post)
   end
 
   test "published scope returns posts ordered by id desc" do
-    ids = Post.published.pluck(:id)
-    assert_equal ids.sort.reverse, ids
+    expected = Post.where(status: "published").order(id: :desc).to_a
+    assert_equal expected, Post.published.to_a
+    assert expected.length >= 2, "expected at least 2 published posts in fixtures"
   end
 
   test "belongs to user" do
