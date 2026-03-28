@@ -25,6 +25,10 @@ class CategoryTest < ActiveSupport::TestCase
     assert category.valid?
   end
 
+  test "has many posts" do
+    assert_respond_to categories(:jogos), :posts
+  end
+
   private
 
   def valid_attributes

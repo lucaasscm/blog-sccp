@@ -25,6 +25,14 @@ class TagTest < ActiveSupport::TestCase
     assert tag.valid?
   end
 
+  test "has many post_tags" do
+    assert_respond_to tags(:libertadores), :post_tags
+  end
+
+  test "has many posts through post_tags" do
+    assert_respond_to tags(:libertadores), :posts
+  end
+
   private
 
   def valid_attributes
