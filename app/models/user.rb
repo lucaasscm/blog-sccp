@@ -13,10 +13,10 @@ class User < ApplicationRecord
   validates :role, inclusion: { in: ROLES }, allow_nil: true
 
   def admin?
-    role == 'admin'
+    role == "admin"
   end
 
   def author?
-    role == 'author'
+    role == "author"
   end
 end
