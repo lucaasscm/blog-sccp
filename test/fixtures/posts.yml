@@ -1,0 +1,13 @@
+published_post:
+  title: "Corinthians é campeão!"
+  content: "O Timão conquistou mais um título importante."
+  status: "published"
+  user: one
+  category: jogos
+
+draft_post:
+  title: "Prévia do próximo jogo"
+  content: "O Corinthians se prepara para mais um desafio."
+  status: "draft"
+  user: one
+  category: mercado_da_bola

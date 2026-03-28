@@ -1,0 +1,11 @@
+published_post_libertadores:
+  post: published_post
+  tag: libertadores
+
+published_post_brasileirao:
+  post: published_post
+  tag: brasileirao
+
+draft_post_yuri_alberto:
+  post: draft_post
+  tag: yuri_alberto

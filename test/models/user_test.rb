@@ -73,6 +73,10 @@ class UserTest < ActiveSupport::TestCase
     assert user.author?
   end
 
+  test "has many posts" do
+    assert_respond_to users(:one), :posts
+  end
+
   private
 
   def valid_attributes
