@@ -1,0 +1,15 @@
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/queue_schema.rb'
+    - 'db/cache_schema.rb'
+    - 'db/cable_schema.rb'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'

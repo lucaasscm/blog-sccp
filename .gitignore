@@ -9,7 +9,7 @@ config/credentials/*.key
 !/log/.keep
 /tmp/*
 !/tmp/.keep
-!/tmp/planning/
+/tmp/planning/
 /storage/*
 !/storage/.keep
 /public/assets
