@@ -104,7 +104,7 @@ class PostTest < ActiveSupport::TestCase
       title: "Corinthians vence mais uma",
       content: "Grande vitória do Timão.",
       status: "draft",
-      user: users(:one),
+      user: users(:lucas),
       category: categories(:jogos)
     }
   end

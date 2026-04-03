@@ -2,19 +2,19 @@ published_post:
   title: "Corinthians é campeão!"
   content: "O Timão conquistou mais um título importante."
   status: "published"
-  user: one
+  user: lucas
   category: jogos
 
 another_published_post:
   title: "Timão goleia o rival"
   content: "Grande atuação do Corinthians na Neo Química Arena."
   status: "published"
-  user: one
+  user: lucas
   category: opiniao
 
 draft_post:
   title: "Prévia do próximo jogo"
   content: "O Corinthians se prepara para mais um desafio."
   status: "draft"
-  user: one
+  user: lucas
   category: mercado_da_bola
