@@ -1,0 +1,19 @@
+<nav class="bg-black text-white">
+  <div class="container mx-auto px-4 max-w-6xl flex items-center justify-between h-16">
+    <%= link_to root_path, class: "flex items-center gap-2 group" do %>
+      <span class="text-red-600 font-black text-2xl leading-none">●</span>
+      <span class="font-black text-xl tracking-tight uppercase">Blog Sempre Altaneiro</span>
+    <% end %>
+
+    <div class="flex items-center gap-6 text-sm font-medium">
+      <%= link_to "Início", root_path, class: "hover:text-red-500 transition-colors" %>
+      <% if authenticated? %>
+        <%= link_to "Admin", admin_root_path, class: "hover:text-red-500 transition-colors" %>
+        <%= button_to "Sair", session_path, method: :delete,
+              class: "hover:text-red-500 transition-colors bg-transparent border-0 cursor-pointer text-sm font-medium text-white p-0" %>
+      <% else %>
+        <%= link_to "Entrar", new_session_path, class: "px-4 py-1.5 border border-white rounded hover:bg-white hover:text-black transition-colors" %>
+      <% end %>
+    </div>
+  </div>
+</nav>

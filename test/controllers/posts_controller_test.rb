@@ -4,12 +4,12 @@ require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
   test "index returns success" do
-    get posts_path, as: :json
+    get posts_path
     assert_response :success
   end
 
   test "index is accessible without authentication" do
-    get posts_path, as: :json
+    get posts_path
     assert_response :success
   end
 
