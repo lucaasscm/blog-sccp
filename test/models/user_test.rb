@@ -3,7 +3,7 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  test "fixture one is valid" do
+  test "fixture lucas is valid" do
     assert users(:lucas).valid?
   end
 
