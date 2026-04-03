@@ -1,0 +1,10 @@
+richard_comment:
+  body: "Andres Sanchez ladrão, fora do timão!"
+  user: richard
+  post: published_post
+
+lucas_comment:
+  body: "Sccp sempre!"
+  user: lucas
+  post: another_published_post
+
