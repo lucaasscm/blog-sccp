@@ -14,7 +14,7 @@
     <aside class="w-56 bg-black text-white flex flex-col min-h-screen shrink-0">
       <div class="px-5 py-5 border-b border-white/10">
         <%= link_to admin_root_path, class: "flex items-center gap-2" do %>
-          <span class="text-red-600 font-black text-lg leading-none">●</span>
+          <span class="text-red-600 font-black text-lg leading-none" aria-hidden="true">●</span>
           <span class="font-black text-sm tracking-tight uppercase leading-tight">Blog Sempre<br>Altaneiro</span>
         <% end %>
       </div>
@@ -39,7 +39,7 @@
 
     <div class="flex-1 flex flex-col min-w-0">
       <header class="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-        <h1 class="text-lg font-black"><%= content_for(:page_title) { controller_name.capitalize } %></h1>
+        <h1 class="text-lg font-black"><%= content_for?(:page_title) ? yield(:page_title) : controller_name.capitalize %></h1>
         <% if notice = flash[:notice] %>
           <p class="px-4 py-2 bg-black text-white text-xs font-medium rounded"><%= notice %></p>
         <% end %>

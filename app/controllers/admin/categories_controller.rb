@@ -5,7 +5,7 @@ module Admin
     before_action :set_category, only: %i[edit update destroy]
 
     def index
-      @categories = Category.order(:title)
+      @categories = Category.left_joins(:posts).group(:id).select("categories.*, COUNT(posts.id) AS posts_count").order(:title)
     end
 
     def new

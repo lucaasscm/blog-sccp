@@ -24,7 +24,7 @@
         <% @categories.each do |category| %>
           <tr class="hover:bg-gray-50">
             <td class="px-5 py-3 font-medium"><%= category.title %></td>
-            <td class="px-5 py-3 text-gray-500"><%= category.posts.count %></td>
+            <td class="px-5 py-3 text-gray-500"><%= category.posts_count %></td>
             <td class="px-5 py-3 text-right">
               <div class="flex items-center justify-end gap-3">
                 <%= link_to "Editar", edit_admin_category_path(category), class: "text-xs font-bold hover:text-red-600 transition-colors" %>

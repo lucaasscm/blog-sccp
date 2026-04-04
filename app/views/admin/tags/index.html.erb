@@ -24,7 +24,7 @@
         <% @tags.each do |tag| %>
           <tr class="hover:bg-gray-50">
             <td class="px-5 py-3 font-medium">#<%= tag.title %></td>
-            <td class="px-5 py-3 text-gray-500"><%= tag.posts.count %></td>
+            <td class="px-5 py-3 text-gray-500"><%= tag.posts_count %></td>
             <td class="px-5 py-3 text-right">
               <div class="flex items-center justify-end gap-3">
                 <%= link_to "Editar", edit_admin_tag_path(tag), class: "text-xs font-bold hover:text-red-600 transition-colors" %>
