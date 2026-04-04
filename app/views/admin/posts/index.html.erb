@@ -1,0 +1,51 @@
+<% content_for :page_title, "Posts" %>
+
+<div class="flex items-center justify-between mb-6">
+  <p class="text-gray-500 text-sm"><%= @posts.size %> post(s) no total</p>
+  <%= link_to "Novo post", new_admin_post_path,
+        class: "px-4 py-2 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors" %>
+</div>
+
+<% if @posts.empty? %>
+  <div class="text-center py-20 text-gray-400">
+    <p class="text-lg font-bold">Nenhum post ainda.</p>
+  </div>
+<% else %>
+  <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 border-b border-gray-200">
+        <tr>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Título</th>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Categoria</th>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Status</th>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Data</th>
+          <th class="px-5 py-3"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <% @posts.each do |post| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-5 py-3 font-medium max-w-xs truncate"><%= post.title %></td>
+            <td class="px-5 py-3 text-gray-500"><%= post.category.title %></td>
+            <td class="px-5 py-3">
+              <% if post.published? %>
+                <span class="px-2 py-0.5 bg-black text-white text-xs font-bold rounded-full">Publicado</span>
+              <% else %>
+                <span class="px-2 py-0.5 bg-gray-200 text-gray-600 text-xs font-bold rounded-full">Rascunho</span>
+              <% end %>
+            </td>
+            <td class="px-5 py-3 text-gray-400"><%= post.created_at.strftime("%d/%m/%Y") %></td>
+            <td class="px-5 py-3 text-right">
+              <div class="flex items-center justify-end gap-3">
+                <%= link_to "Editar", edit_admin_post_path(post), class: "text-xs font-bold hover:text-red-600 transition-colors" %>
+                <%= button_to "Excluir", admin_post_path(post), method: :delete,
+                      data: { turbo_confirm: "Tem certeza que deseja excluir este post?" },
+                      class: "text-xs font-bold text-red-600 hover:text-red-800 transition-colors bg-transparent border-0 cursor-pointer" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

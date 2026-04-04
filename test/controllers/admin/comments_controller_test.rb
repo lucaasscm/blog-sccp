@@ -7,7 +7,7 @@ module Admin
     setup { sign_in_as(users(:lucas)) }
 
     test "index returns success" do
-      get admin_comments_path, as: :json
+      get admin_comments_path
       assert_response :success
     end
 

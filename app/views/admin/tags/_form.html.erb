@@ -1,0 +1,24 @@
+<%= form_with model: [:admin, tag], class: "space-y-5" do |form| %>
+  <% if tag.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded px-4 py-3 text-sm text-red-700">
+      <p class="font-bold mb-1"><%= pluralize(tag.errors.count, "erro") %> impediram o salvamento:</p>
+      <ul class="list-disc list-inside space-y-0.5">
+        <% tag.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, "Título", class: "block text-sm font-bold mb-1" %>
+    <%= form.text_field :title,
+          class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+  </div>
+
+  <div class="flex items-center gap-4 pt-1">
+    <%= form.submit tag.persisted? ? "Salvar alterações" : "Criar tag",
+          class: "px-6 py-2 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+    <%= link_to "Cancelar", admin_tags_path, class: "text-sm text-gray-500 hover:text-black transition-colors" %>
+  </div>
+<% end %>

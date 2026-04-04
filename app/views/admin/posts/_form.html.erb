@@ -1,0 +1,70 @@
+<%= form_with model: [:admin, post], class: "space-y-6" do |form| %>
+  <% if post.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded px-4 py-3 text-sm text-red-700">
+      <p class="font-bold mb-1"><%= pluralize(post.errors.count, "erro") %> impediram o salvamento:</p>
+      <ul class="list-disc list-inside space-y-0.5">
+        <% post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, "Título", class: "block text-sm font-bold mb-1" %>
+    <%= form.text_field :title,
+          class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+  </div>
+
+  <div>
+    <%= form.label :content, "Conteúdo", class: "block text-sm font-bold mb-1" %>
+    <%= form.text_area :content, rows: 12,
+          class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black resize-y" %>
+  </div>
+
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <%= form.label :status, "Status", class: "block text-sm font-bold mb-1" %>
+      <%= form.select :status, [["Rascunho", "draft"], ["Publicado", "published"]],
+            { selected: post.status },
+            class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+    </div>
+
+    <div>
+      <%= form.label :category_id, "Categoria", class: "block text-sm font-bold mb-1" %>
+      <%= form.collection_select :category_id, Category.order(:title), :id, :title,
+            { prompt: "Selecione uma categoria" },
+            class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :tag_ids, "Tags", class: "block text-sm font-bold mb-2" %>
+    <div class="flex flex-wrap gap-3">
+      <% Tag.order(:title).each do |tag| %>
+        <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+          <%= form.check_box :tag_ids, { multiple: true, checked: post.tag_ids.include?(tag.id) }, tag.id, nil %>
+          <span>#<%= tag.title %></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :cover_image, "Imagem de capa", class: "block text-sm font-bold mb-1" %>
+    <% if post.cover_image.attached? %>
+      <div class="mb-2">
+        <%= image_tag post.cover_image, class: "h-24 w-auto rounded border border-gray-200", alt: "Capa atual" %>
+        <p class="text-xs text-gray-400 mt-1">Envie uma nova imagem para substituir.</p>
+      </div>
+    <% end %>
+    <%= form.file_field :cover_image, accept: "image/*",
+          class: "text-sm text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:bg-black file:text-white file:text-xs file:font-bold file:cursor-pointer" %>
+  </div>
+
+  <div class="flex items-center gap-4 pt-2">
+    <%= form.submit post.persisted? ? "Salvar alterações" : "Criar post",
+          class: "px-6 py-2 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+    <%= link_to "Cancelar", admin_posts_path, class: "text-sm text-gray-500 hover:text-black transition-colors" %>
+  </div>
+<% end %>

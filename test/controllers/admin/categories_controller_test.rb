@@ -7,7 +7,7 @@ module Admin
     setup { sign_in_as(users(:lucas)) }
 
     test "index returns success" do
-      get admin_categories_path, as: :json
+      get admin_categories_path
       assert_response :success
     end
 
@@ -18,7 +18,7 @@ module Admin
     end
 
     test "new returns success" do
-      get new_admin_category_path, as: :json
+      get new_admin_category_path
       assert_response :success
     end
 
@@ -30,17 +30,17 @@ module Admin
     end
 
     test "create with invalid params renders new" do
-      post admin_categories_path, params: { category: { title: "" } }, as: :json
+      post admin_categories_path, params: { category: { title: "" } }
       assert_response :unprocessable_entity
     end
 
     test "create with duplicate title renders new" do
-      post admin_categories_path, params: { category: { title: categories(:jogos).title } }, as: :json
+      post admin_categories_path, params: { category: { title: categories(:jogos).title } }
       assert_response :unprocessable_entity
     end
 
     test "edit returns success" do
-      get edit_admin_category_path(categories(:jogos)), as: :json
+      get edit_admin_category_path(categories(:jogos))
       assert_response :success
     end
 
@@ -51,7 +51,7 @@ module Admin
     end
 
     test "update with invalid params renders edit" do
-      patch admin_category_path(categories(:jogos)), params: { category: { title: "" } }, as: :json
+      patch admin_category_path(categories(:jogos)), params: { category: { title: "" } }
       assert_response :unprocessable_entity
     end
 

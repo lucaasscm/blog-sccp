@@ -1,0 +1,36 @@
+<% content_for :page_title, "Comentários" %>
+
+<% if @comments.empty? %>
+  <div class="text-center py-20 text-gray-400">
+    <p class="text-lg font-bold">Nenhum comentário ainda.</p>
+  </div>
+<% else %>
+  <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 border-b border-gray-200">
+        <tr>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Autor</th>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Comentário</th>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Post</th>
+          <th class="text-left px-5 py-3 font-bold text-gray-600 uppercase text-xs tracking-wider">Data</th>
+          <th class="px-5 py-3"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <% @comments.each do |comment| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-5 py-3 font-medium whitespace-nowrap"><%= comment.user.name %></td>
+            <td class="px-5 py-3 text-gray-600 max-w-xs truncate"><%= comment.body %></td>
+            <td class="px-5 py-3 text-gray-500 max-w-xs truncate"><%= comment.post.title %></td>
+            <td class="px-5 py-3 text-gray-400 whitespace-nowrap"><%= comment.created_at.strftime("%d/%m/%Y") %></td>
+            <td class="px-5 py-3 text-right">
+              <%= button_to "Excluir", admin_comment_path(comment), method: :delete,
+                    data: { turbo_confirm: "Tem certeza que deseja excluir este comentário?" },
+                    class: "text-xs font-bold text-red-600 hover:text-red-800 transition-colors bg-transparent border-0 cursor-pointer" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

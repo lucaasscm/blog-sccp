@@ -1,23 +1,45 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Sign in</h1>
+<% content_for :title, "Entrar — Blog Sempre Altaneiro" %>
 
-  <%= form_with url: session_url, class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-    </div>
-
-    <div class="my-5">
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-    </div>
-
-    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-      <div class="inline">
-        <%= form.submit "Sign in", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+<div class="min-h-[70vh] flex items-center justify-center">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="text-red-600 font-black text-3xl leading-none">●</span>
+        <span class="font-black text-2xl tracking-tight uppercase">Blog Sempre Altaneiro</span>
       </div>
-
-      <div class="mt-4 text-sm text-gray-500 sm:mt-0">
-        <%= link_to "Forgot password?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
-      </div>
+      <p class="text-gray-500 text-sm">Área restrita. Acesso somente para admins.</p>
     </div>
-  <% end %>
+
+    <div class="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+      <%= form_with url: session_url do |form| %>
+        <div class="mb-5">
+          <%= form.label :email_address, "E-mail", class: "block text-sm font-bold mb-1" %>
+          <%= form.email_field :email_address,
+                required: true,
+                autofocus: true,
+                autocomplete: "username",
+                placeholder: "seu@email.com",
+                value: params[:email_address],
+                class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+        </div>
+
+        <div class="mb-6">
+          <%= form.label :password, "Senha", class: "block text-sm font-bold mb-1" %>
+          <%= form.password_field :password,
+                required: true,
+                autocomplete: "current-password",
+                placeholder: "••••••••",
+                maxlength: 72,
+                class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+        </div>
+
+        <%= form.submit "Entrar",
+              class: "w-full py-2.5 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+      <% end %>
+    </div>
+    <p class="text-center text-sm text-gray-500 mt-4">
+      Não tem uma conta?
+      <%= link_to "Cadastre-se", new_registration_path, class: "font-bold text-black underline hover:text-red-600" %>
+    </p>
+  </div>
 </div>

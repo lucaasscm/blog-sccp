@@ -1,0 +1,80 @@
+<% content_for :title, @post.title %>
+
+<article class="max-w-3xl mx-auto">
+  <% if @post.cover_image.attached? %>
+    <div class="aspect-video overflow-hidden rounded-lg mb-8 bg-gray-100">
+      <%= image_tag @post.cover_image, class: "w-full h-full object-cover", alt: @post.title %>
+    </div>
+  <% end %>
+
+  <header class="mb-8">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="text-xs font-bold uppercase tracking-wider bg-black text-white px-2 py-0.5 rounded">
+        <%= @post.category.title %>
+      </span>
+      <span class="text-xs text-gray-400"><%= @post.created_at.strftime("%d/%m/%Y") %></span>
+    </div>
+
+    <h1 class="text-4xl font-black leading-tight mb-4"><%= @post.title %></h1>
+
+    <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-4">
+      <span>Por <strong class="text-black"><%= @post.user.name %></strong></span>
+      <% if @post.tags.any? %>
+        <div class="flex flex-wrap gap-1">
+          <% @post.tags.each do |tag| %>
+            <span class="border border-gray-300 px-2 py-0.5 rounded-full text-xs">#<%= tag.title %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </header>
+
+  <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-16">
+    <%= simple_format @post.content %>
+  </div>
+
+  <section class="border-t-4 border-black pt-8">
+    <h2 class="text-2xl font-black uppercase mb-6">
+      Comentários
+      <span class="text-red-600">(<%= @post.comments.size %>)</span>
+    </h2>
+
+    <% if @post.comments.any? %>
+      <div class="space-y-6 mb-10">
+        <% @post.comments.each do |comment| %>
+          <div class="border-l-4 border-red-600 pl-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold text-sm"><%= comment.user.name %></span>
+              <span class="text-xs text-gray-400"><%= comment.created_at.strftime("%d/%m/%Y às %H:%M") %></span>
+            </div>
+            <p class="text-gray-700 text-sm leading-relaxed"><%= comment.body %></p>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-400 text-sm mb-10">Nenhum comentário ainda. Seja o primeiro!</p>
+    <% end %>
+
+    <% if authenticated? %>
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+        <h3 class="font-black text-lg mb-4">Deixe seu comentário</h3>
+        <%= form_with model: [@post, Comment.new], url: post_comments_path(@post) do |form| %>
+          <div class="mb-4">
+            <%= form.text_area :body, rows: 4,
+                  placeholder: "Escreva seu comentário...",
+                  class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black resize-none" %>
+          </div>
+          <%= form.submit "Comentar",
+                class: "px-6 py-2 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+        <p class="text-gray-600 text-sm">
+          <%= link_to "Entre na sua conta", new_session_path, class: "font-bold text-black underline hover:text-red-600" %>
+          para deixar um comentário.
+        </p>
+      </div>
+    <% end %>
+  </section>
+</article>
