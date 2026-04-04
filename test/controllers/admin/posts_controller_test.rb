@@ -68,6 +68,13 @@ module Admin
       assert_redirected_to new_session_path
     end
 
+    test "index redirects to root when user has no role" do
+      sign_out
+      sign_in_as(users(:richard))
+      get admin_posts_path
+      assert_redirected_to root_path
+    end
+
     private
 
     def valid_post_params

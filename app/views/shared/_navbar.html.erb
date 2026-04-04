@@ -8,7 +8,9 @@
     <div class="flex items-center gap-6 text-sm font-medium">
       <%= link_to "Início", root_path, class: "hover:text-red-500 transition-colors" %>
       <% if authenticated? %>
-        <%= link_to "Admin", admin_root_path, class: "hover:text-red-500 transition-colors" %>
+        <% if Current.user.admin? || Current.user.author? %>
+          <%= link_to "Admin", admin_root_path, class: "hover:text-red-500 transition-colors" %>
+        <% end %>
         <%= button_to "Sair", session_path, method: :delete,
               class: "hover:text-red-500 transition-colors bg-transparent border-0 cursor-pointer text-sm font-medium text-white p-0" %>
       <% else %>
