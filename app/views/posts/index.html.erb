@@ -1,0 +1,22 @@
+<% content_for :title, "Blog Sempre Altaneiro — O blog da Fiel" %>
+
+<section>
+  <div class="mb-10 border-b-4 border-red-600 pb-4">
+    <h1 class="text-4xl font-black uppercase tracking-tight">Últimas do Timão</h1>
+    <p class="text-gray-500 mt-1 text-sm">Notícias, análises e paixão pelo Sport Club Corinthians Paulista</p>
+  </div>
+
+  <% if @posts.empty? %>
+    <div class="text-center py-24">
+      <p class="text-5xl mb-4" aria-hidden="true">⚫</p>
+      <p class="text-xl font-bold">Nenhum post publicado ainda.</p>
+      <p class="text-gray-500 mt-2 text-sm">Volte em breve. O Timão tem sempre novidades.</p>
+    </div>
+  <% else %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% @posts.each do |post| %>
+        <%= render "posts/card", post: post %>
+      <% end %>
+    </div>
+  <% end %>
+</section>
