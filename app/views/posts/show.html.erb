@@ -36,7 +36,7 @@
   <section class="border-t-4 border-black pt-8">
     <h2 class="text-2xl font-black uppercase mb-6">
       Comentários
-      <span class="text-red-600">(<%= @post.comments.size %>)</span>
+      <span class="text-red-600">(<%= @post.comments.length %>)</span>
     </h2>
 
     <% if @post.comments.any? %>

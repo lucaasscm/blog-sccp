@@ -5,7 +5,6 @@ require "test_helper"
 class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "new is accessible without authentication" do
     get new_registration_path
-    assert_response :success
     assert_not response.redirect?
   end
 

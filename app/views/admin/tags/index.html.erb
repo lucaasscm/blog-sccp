@@ -1,7 +1,7 @@
 <% content_for :page_title, "Tags" %>
 
 <div class="flex items-center justify-between mb-6">
-  <p class="text-gray-500 text-sm"><%= @tags.size %> tag(s)</p>
+  <p class="text-gray-500 text-sm"><%= @tags.length %> tag(s)</p>
   <%= link_to "Nova tag", new_admin_tag_path,
         class: "px-4 py-2 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors" %>
 </div>
