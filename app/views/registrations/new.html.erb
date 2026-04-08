@@ -1,0 +1,72 @@
+<% content_for :title, "Criar conta — Blog Sempre Altaneiro" %>
+
+<div class="min-h-[70vh] flex items-center justify-center">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="text-red-600 font-black text-3xl leading-none" aria-hidden="true">●</span>
+        <span class="font-black text-2xl tracking-tight uppercase">Blog Sempre Altaneiro</span>
+      </div>
+      <p class="text-gray-500 text-sm">Crie sua conta para participar dos comentários.</p>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
+      <%= form_with model: @user, url: registration_path do |form| %>
+        <% if @user.errors.any? %>
+          <div class="bg-red-50 border border-red-200 rounded px-4 py-3 text-sm text-red-700 mb-5">
+            <ul class="list-disc list-inside space-y-0.5">
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-4">
+          <%= form.label :name, "Nome", class: "block text-sm font-bold mb-1" %>
+          <%= form.text_field :name,
+                required: true,
+                autofocus: true,
+                autocomplete: "name",
+                placeholder: "Seu nome completo",
+                class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+        </div>
+
+        <div class="mb-4">
+          <%= form.label :email_address, "E-mail", class: "block text-sm font-bold mb-1" %>
+          <%= form.email_field :email_address,
+                required: true,
+                autocomplete: "email",
+                placeholder: "seu@email.com",
+                class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+        </div>
+
+        <div class="mb-4">
+          <%= form.label :password, "Senha", class: "block text-sm font-bold mb-1" %>
+          <%= form.password_field :password,
+                required: true,
+                autocomplete: "new-password",
+                placeholder: "••••••••",
+                class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+        </div>
+
+        <div class="mb-6">
+          <%= form.label :password_confirmation, "Confirmar senha", class: "block text-sm font-bold mb-1" %>
+          <%= form.password_field :password_confirmation,
+                required: true,
+                autocomplete: "new-password",
+                placeholder: "••••••••",
+                class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black" %>
+        </div>
+
+        <%= form.submit "Criar conta",
+              class: "w-full py-2.5 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+      <% end %>
+    </div>
+
+    <p class="text-center text-sm text-gray-500 mt-4">
+      Já tem uma conta?
+      <%= link_to "Entre aqui", new_session_path, class: "font-bold text-black underline hover:text-red-600" %>
+    </p>
+  </div>
+</div>

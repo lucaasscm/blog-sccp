@@ -7,7 +7,7 @@ module Admin
     setup { sign_in_as(users(:lucas)) }
 
     test "index returns success" do
-      get admin_posts_path, as: :json
+      get admin_posts_path
       assert_response :success
     end
 
@@ -18,7 +18,7 @@ module Admin
     end
 
     test "new returns success" do
-      get new_admin_post_path, as: :json
+      get new_admin_post_path
       assert_response :success
     end
 
@@ -35,12 +35,12 @@ module Admin
     end
 
     test "create with invalid params renders new" do
-      post admin_posts_path, params: { post: valid_post_params.merge(title: "") }, as: :json
+      post admin_posts_path, params: { post: valid_post_params.merge(title: "") }
       assert_response :unprocessable_entity
     end
 
     test "edit returns success" do
-      get edit_admin_post_path(posts(:published_post)), as: :json
+      get edit_admin_post_path(posts(:published_post))
       assert_response :success
     end
 
@@ -51,7 +51,7 @@ module Admin
     end
 
     test "update with invalid params renders edit" do
-      patch admin_post_path(posts(:published_post)), params: { post: { title: "" } }, as: :json
+      patch admin_post_path(posts(:published_post)), params: { post: { title: "" } }
       assert_response :unprocessable_entity
     end
 
@@ -66,6 +66,13 @@ module Admin
       sign_out
       delete admin_post_path(posts(:published_post))
       assert_redirected_to new_session_path
+    end
+
+    test "index redirects to root when user has no role" do
+      sign_out
+      sign_in_as(users(:richard))
+      get admin_posts_path
+      assert_redirected_to root_path
     end
 
     private

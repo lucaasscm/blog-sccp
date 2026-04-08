@@ -4,6 +4,7 @@ lucas:
   name: Lucas
   email_address: lucas@example.com
   password_digest: <%= password_digest %>
+  role: admin
 
 richard:
   name: Richard

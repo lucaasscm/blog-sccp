@@ -5,7 +5,7 @@ module Admin
     before_action :set_tag, only: %i[edit update destroy]
 
     def index
-      @tags = Tag.order(:title)
+      @tags = Tag.left_joins(:posts).group("tags.id").select("tags.*, COUNT(posts.id) AS posts_count").order(:title)
     end
 
     def new

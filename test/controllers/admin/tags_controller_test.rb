@@ -7,7 +7,7 @@ module Admin
     setup { sign_in_as(users(:lucas)) }
 
     test "index returns success" do
-      get admin_tags_path, as: :json
+      get admin_tags_path
       assert_response :success
     end
 
@@ -18,7 +18,7 @@ module Admin
     end
 
     test "new returns success" do
-      get new_admin_tag_path, as: :json
+      get new_admin_tag_path
       assert_response :success
     end
 
@@ -30,17 +30,17 @@ module Admin
     end
 
     test "create with invalid params renders new" do
-      post admin_tags_path, params: { tag: { title: "" } }, as: :json
+      post admin_tags_path, params: { tag: { title: "" } }
       assert_response :unprocessable_entity
     end
 
     test "create with duplicate title renders new" do
-      post admin_tags_path, params: { tag: { title: tags(:fiel).title } }, as: :json
+      post admin_tags_path, params: { tag: { title: tags(:fiel).title } }
       assert_response :unprocessable_entity
     end
 
     test "edit returns success" do
-      get edit_admin_tag_path(tags(:fiel)), as: :json
+      get edit_admin_tag_path(tags(:fiel))
       assert_response :success
     end
 
@@ -51,7 +51,7 @@ module Admin
     end
 
     test "update with invalid params renders edit" do
-      patch admin_tag_path(tags(:fiel)), params: { tag: { title: "" } }, as: :json
+      patch admin_tag_path(tags(:fiel)), params: { tag: { title: "" } }
       assert_response :unprocessable_entity
     end
 
