@@ -47,7 +47,7 @@
               <div class="flex items-center gap-2 mb-1">
                 <span class="font-bold text-sm"><%= comment.user.name %></span>
                 <span class="text-xs text-gray-400"><%= comment.created_at.strftime("%d/%m/%Y às %H:%M") %></span>
-                <% if authenticated? && comment.user == Current.user %>
+                <% if (authenticated? && (comment.user == Current.user || Current.user.admin?)) %>
                   <%= link_to "Editar", edit_post_comment_path(@post, comment),
                         class: "text-xs text-gray-400 hover:text-black underline ml-auto" %>
                   <%= button_to "Excluir", post_comment_path(@post, comment),
