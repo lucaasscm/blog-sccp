@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   resources :posts, only: %i[index show] do
-    resources :comments, only: %i[create]
+    resources :comments, only: %i[create edit update destroy]
   end
 
   namespace :admin do
