@@ -1,0 +1,17 @@
+<%= turbo_frame_tag dom_id(@comment) do %>
+  <div class="border-l-4 border-red-600 pl-4">
+    <%= form_with model: [@post, @comment] do |form| %>
+      <div class="mb-2">
+        <%= form.text_area :body, rows: 3,
+              class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black resize-none" %>
+      </div>
+      <div class="flex items-center gap-3">
+        <%= form.submit "Salvar",
+              class: "px-4 py-1.5 bg-black text-white text-xs font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+        <%= link_to "Cancelar", post_path(@post),
+              class: "text-xs text-gray-400 hover:text-black underline",
+              data: { turbo_frame: dom_id(@comment) } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

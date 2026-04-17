@@ -36,19 +36,29 @@
   <section class="border-t-4 border-black pt-8">
     <h2 class="text-2xl font-black uppercase mb-6">
       Comentários
-      <span class="text-red-600">(<%= @post.comments.length %>)</span>
+      <span id="comments-count" class="text-red-600">(<%= @post.comments.length %>)</span>
     </h2>
 
     <% if @post.comments.any? %>
       <div class="space-y-6 mb-10">
         <% @post.comments.each do |comment| %>
-          <div class="border-l-4 border-red-600 pl-4">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="font-bold text-sm"><%= comment.user.name %></span>
-              <span class="text-xs text-gray-400"><%= comment.created_at.strftime("%d/%m/%Y às %H:%M") %></span>
+          <%= turbo_frame_tag dom_id(comment) do %>
+            <div class="border-l-4 border-red-600 pl-4">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-bold text-sm"><%= comment.user.name %></span>
+                <span class="text-xs text-gray-400"><%= comment.created_at.strftime("%d/%m/%Y às %H:%M") %></span>
+                <% if authenticated? && comment.user == Current.user %>
+                  <%= link_to "Editar", edit_post_comment_path(@post, comment),
+                        class: "text-xs text-gray-400 hover:text-black underline ml-auto" %>
+                  <%= button_to "Excluir", post_comment_path(@post, comment),
+                        method: :delete,
+                        class: "text-xs text-red-400 hover:text-red-600 underline bg-transparent border-0 cursor-pointer p-0",
+                        data: { turbo_confirm: "Excluir este comentário?" } %>
+                <% end %>
+              </div>
+              <p class="text-gray-700 text-sm leading-relaxed"><%= comment.body %></p>
             </div>
-            <p class="text-gray-700 text-sm leading-relaxed"><%= comment.body %></p>
-          </div>
+          <% end %>
         <% end %>
       </div>
     <% else %>
