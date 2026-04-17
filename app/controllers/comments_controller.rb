@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
   end
 
   def require_owner
-    unless @comment.user == Current.user
+    unless @comment.user == Current.user || Current.user.admin?
       redirect_to @post, alert: "Você não tem permissão para isso."
     end
   end

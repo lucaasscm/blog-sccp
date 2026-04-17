@@ -10,3 +10,8 @@ richard:
   name: Richard
   email_address: richard@example.com
   password_digest: <%= password_digest %>
+
+joel:
+  name: Joel
+  email_address: joel@example.com
+  password_digest: <%= password_digest %>
