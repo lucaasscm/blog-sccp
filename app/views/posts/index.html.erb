@@ -1,22 +1,74 @@
 <% content_for :title, "Blog Sempre Altaneiro — O blog da Fiel" %>
 
-<section>
-  <div class="mb-10 border-b-4 border-red-600 pb-4">
-    <h1 class="text-4xl font-black uppercase tracking-tight">Últimas do Timão</h1>
-    <p class="text-gray-500 mt-1 text-sm">Notícias, análises e paixão pelo Sport Club Corinthians Paulista</p>
-  </div>
+<% if @posts.any? %>
+  <% hero = @posts.first %>
 
-  <% if @posts.empty? %>
-    <div class="text-center py-24">
-      <p class="text-5xl mb-4" aria-hidden="true">⚫</p>
-      <p class="text-xl font-bold">Nenhum post publicado ainda.</p>
-      <p class="text-gray-500 mt-2 text-sm">Volte em breve. O Timão tem sempre novidades.</p>
-    </div>
-  <% else %>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <% @posts.each do |post| %>
-        <%= render "posts/card", post: post %>
+  <% content_for :fullwidth do %>
+    <%# HERO %>
+    <div class="relative overflow-hidden" style="height: 560px;">
+      <% if hero.cover_image.attached? %>
+        <%= image_tag hero.cover_image, class: "w-full h-full object-cover", alt: hero.title %>
+      <% else %>
+        <%= image_tag "hero-crowd.jpg", class: "w-full h-full object-cover", alt: "Torcida" %>
       <% end %>
+      <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%);"></div>
+      <div class="absolute inset-0 flex items-center">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="max-w-2xl text-white">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="w-5 h-px bg-red-600 inline-block"></span>
+              <span class="text-red-400 text-xs font-semibold uppercase tracking-widest"><%= hero.category.title %></span>
+            </div>
+            <h1 class="font-serif-display mb-5 leading-tight" style="font-size: 3.2rem; font-weight: 800;">
+              <%= hero.title %>
+            </h1>
+            <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-lg">
+              <%= truncate(hero.content, length: 180) %>
+            </p>
+            <div class="flex items-center gap-3 text-xs text-gray-400 uppercase tracking-wider mb-8">
+              <span>Por <%= hero.user.name %></span>
+              <span class="text-red-600">●</span>
+              <span><%= hero.created_at.strftime("%d %b %Y") %></span>
+            </div>
+            <%= link_to post_path(hero), class: "inline-flex items-center gap-2 border border-white text-white text-xs font-bold uppercase tracking-widest px-6 py-3 hover:bg-white hover:text-black transition-colors" do %>
+              Ler Matéria Completa &nbsp;→
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%# TICKER %>
+    <div class="bg-black text-white py-3 overflow-hidden">
+      <div class="ticker-content">
+        <% (@posts.to_a * 4).each do |post| %>
+          <span class="inline-flex items-center gap-4 px-6 text-xs uppercase tracking-wider">
+            <%= post.title %>
+            <span class="text-red-600 ml-2">●</span>
+          </span>
+        <% end %>
+      </div>
     </div>
   <% end %>
-</section>
+
+  <%# EM DESTAQUE %>
+  <div class="mb-8 flex items-end justify-between border-b border-gray-300 pb-4">
+    <div>
+      <p class="text-red-600 text-xs font-semibold uppercase tracking-widest mb-1">No Ar</p>
+      <h2 class="font-serif-display font-bold" style="font-size: 2rem;">Em destaque</h2>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    <% @posts.each do |post| %>
+      <%= render "posts/card", post: post %>
+    <% end %>
+  </div>
+
+<% else %>
+  <div class="text-center py-24">
+    <p class="text-5xl mb-4" aria-hidden="true">⚫</p>
+    <p class="text-xl font-bold font-serif-display">Nenhum post publicado ainda.</p>
+    <p class="text-gray-500 mt-2 text-sm">Volte em breve. O Timão tem sempre novidades.</p>
+  </div>
+<% end %>

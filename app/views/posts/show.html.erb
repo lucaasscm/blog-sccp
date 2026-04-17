@@ -2,39 +2,40 @@
 
 <article class="max-w-3xl mx-auto">
   <% if @post.cover_image.attached? %>
-    <div class="aspect-video overflow-hidden rounded-lg mb-8 bg-gray-100">
+    <div class="aspect-video overflow-hidden mb-8 bg-gray-100">
       <%= image_tag @post.cover_image, class: "w-full h-full object-cover", alt: @post.title %>
     </div>
   <% end %>
 
-  <header class="mb-8">
-    <div class="flex items-center gap-2 mb-4">
-      <span class="text-xs font-bold uppercase tracking-wider bg-black text-white px-2 py-0.5 rounded">
+  <header class="mb-10">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="bg-red-600 text-white text-xs font-bold uppercase tracking-wider px-2 py-1">
         <%= @post.category.title %>
       </span>
-      <span class="text-xs text-gray-400"><%= @post.created_at.strftime("%d/%m/%Y") %></span>
+      <span class="text-xs text-gray-400 uppercase tracking-wider"><%= @post.created_at.strftime("%d %b %Y") %></span>
     </div>
 
-    <h1 class="text-4xl font-black leading-tight mb-4"><%= @post.title %></h1>
+    <h1 class="font-serif-display font-black leading-tight mb-5" style="font-size: 2.8rem; line-height: 1.1;">
+      <%= @post.title %>
+    </h1>
 
-    <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-4">
+    <div class="flex items-center gap-3 text-xs text-gray-500 uppercase tracking-wider border-b border-gray-300 pb-5">
       <span>Por <strong class="text-black"><%= @post.user.name %></strong></span>
       <% if @post.tags.any? %>
-        <div class="flex flex-wrap gap-1">
-          <% @post.tags.each do |tag| %>
-            <span class="border border-gray-300 px-2 py-0.5 rounded-full text-xs">#<%= tag.title %></span>
-          <% end %>
-        </div>
+        <span class="text-red-600">●</span>
+        <% @post.tags.each do |tag| %>
+          <span>#<%= tag.title %></span>
+        <% end %>
       <% end %>
     </div>
   </header>
 
-  <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-16">
+  <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-16" style="font-family: 'Inter', sans-serif;">
     <%= simple_format @post.content %>
   </div>
 
   <section class="border-t-4 border-black pt-8">
-    <h2 class="text-2xl font-black uppercase mb-6">
+    <h2 class="font-serif-display font-black text-2xl uppercase mb-6">
       Comentários
       <span id="comments-count" class="text-red-600">(<%= @post.comments.length %>)</span>
     </h2>
@@ -44,9 +45,9 @@
         <% @post.comments.each do |comment| %>
           <%= turbo_frame_tag dom_id(comment) do %>
             <div class="border-l-4 border-red-600 pl-4">
-              <div class="flex items-center gap-2 mb-1">
+              <div class="flex items-center gap-3 mb-1 flex-wrap">
                 <span class="font-bold text-sm"><%= comment.user.name %></span>
-                <span class="text-xs text-gray-400"><%= comment.created_at.strftime("%d/%m/%Y às %H:%M") %></span>
+                <span class="text-xs text-gray-400 uppercase tracking-wider"><%= comment.created_at.strftime("%d %b %Y às %H:%M") %></span>
                 <% if (authenticated? && (comment.user == Current.user || Current.user.admin?)) %>
                   <%= link_to "Editar", edit_post_comment_path(@post, comment),
                         class: "text-xs text-gray-400 hover:text-black underline ml-auto" %>
@@ -66,20 +67,20 @@
     <% end %>
 
     <% if authenticated? %>
-      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
-        <h3 class="font-black text-lg mb-4">Deixe seu comentário</h3>
+      <div class="bg-white border border-gray-200 p-6">
+        <h3 class="font-serif-display font-black text-lg mb-4">Deixe seu comentário</h3>
         <%= form_with model: [@post, Comment.new], url: post_comments_path(@post) do |form| %>
           <div class="mb-4">
             <%= form.text_area :body, rows: 4,
                   placeholder: "Escreva seu comentário...",
-                  class: "w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black resize-none" %>
+                  class: "w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-black resize-none" %>
           </div>
           <%= form.submit "Comentar",
-                class: "px-6 py-2 bg-black text-white text-sm font-bold rounded hover:bg-red-600 transition-colors cursor-pointer" %>
+                class: "px-6 py-2 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-red-600 transition-colors cursor-pointer" %>
         <% end %>
       </div>
     <% else %>
-      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+      <div class="bg-white border border-gray-200 p-6 text-center">
         <p class="text-gray-600 text-sm">
           <%= link_to "Entre na sua conta", new_session_path, class: "font-bold text-black underline hover:text-red-600" %>
           para deixar um comentário.
