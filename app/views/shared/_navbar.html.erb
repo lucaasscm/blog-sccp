@@ -1,20 +1,25 @@
-<nav class="bg-black text-white">
+<nav class="site-navbar" data-controller="navbar">
   <div class="container mx-auto px-4 max-w-6xl flex items-center justify-between h-16">
-    <%= link_to root_path, class: "flex items-center gap-2 group" do %>
-      <span class="text-red-600 font-black text-2xl leading-none" aria-hidden="true">●</span>
-      <span class="font-black text-xl tracking-tight uppercase">Blog Sempre Altaneiro</span>
+    <%= link_to root_path, class: "flex items-center gap-3 group" do %>
+      <div class="w-9 h-9 bg-black flex items-center justify-center flex-shrink-0">
+        <span class="text-white font-black text-lg leading-none">C</span>
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="font-black text-sm tracking-tight uppercase font-serif-display">Blog Sempre Altaneiro</span>
+        <span class="text-xs text-gray-500 uppercase tracking-widest mt-0.5">Blog do Timão</span>
+      </div>
     <% end %>
 
-    <div class="flex items-center gap-6 text-sm font-medium">
-      <%= link_to "Início", root_path, class: "hover:text-red-500 transition-colors" %>
+    <div class="flex items-center gap-8 text-xs font-semibold tracking-widest uppercase">
+      <%= link_to "Home", root_path, class: "text-red-600 hover:text-red-700 transition-colors" %>
       <% if authenticated? %>
         <% if Current.user.admin? || Current.user.author? %>
-          <%= link_to "Admin", admin_root_path, class: "hover:text-red-500 transition-colors" %>
+          <%= link_to "Admin", admin_root_path, class: "text-black hover:text-red-600 transition-colors" %>
         <% end %>
         <%= button_to "Sair", session_path, method: :delete,
-              class: "hover:text-red-500 transition-colors bg-transparent border-0 cursor-pointer text-sm font-medium text-white p-0" %>
+              class: "text-black hover:text-red-600 transition-colors bg-transparent border-0 cursor-pointer text-xs font-semibold tracking-widest uppercase p-0" %>
       <% else %>
-        <%= link_to "Entrar", new_session_path, class: "px-4 py-1.5 border border-white rounded hover:bg-white hover:text-black transition-colors" %>
+        <%= link_to "Entrar", new_session_path, class: "text-black hover:text-red-600 transition-colors" %>
       <% end %>
     </div>
   </div>

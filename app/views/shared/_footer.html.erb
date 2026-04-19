@@ -1,18 +1,45 @@
 <footer class="bg-black text-white mt-16">
-  <div class="container mx-auto px-4 max-w-6xl py-10">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="text-red-600 font-black text-xl leading-none">●</span>
-        <span class="font-black text-lg tracking-tight uppercase">Blog Sempre Altaneiro</span>
+  <div class="container mx-auto px-4 max-w-6xl py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div>
+        <h3 class="font-serif-display font-black text-2xl uppercase tracking-tight mb-3">Blog Sempre Altaneiro</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Crônicas, análises e a voz da maior torcida do Brasil.<br>
+          Feito com sangue preto e branco. Vai, Corinthians!
+        </p>
       </div>
 
-      <p class="text-gray-400 text-sm text-center">
-        Feito com sangue preto e branco. Vai, Corinthians!
-      </p>
+      <div>
+        <p class="text-red-600 text-xs font-semibold uppercase tracking-widest mb-4">Seções</p>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><%= link_to "Início", root_path, class: "hover:text-white transition-colors" %></li>
+          <% if authenticated? && (Current.user.admin? || Current.user.author?) %>
+            <li><%= link_to "Admin", admin_root_path, class: "hover:text-white transition-colors" %></li>
+          <% end %>
+        </ul>
+      </div>
 
+      <div>
+        <p class="text-red-600 text-xs font-semibold uppercase tracking-widest mb-4">Conta</p>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <% if authenticated? %>
+            <li>
+              <%= button_to "Sair", session_path, method: :delete,
+                    class: "text-gray-400 hover:text-white transition-colors bg-transparent border-0 cursor-pointer text-sm p-0 text-left" %>
+            </li>
+          <% else %>
+            <li><%= link_to "Entrar", new_session_path, class: "hover:text-white transition-colors" %></li>
+            <li><%= link_to "Criar conta", new_registration_path, class: "hover:text-white transition-colors" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
       <p class="text-gray-500 text-xs">
-        &copy; <%= Date.current.year %> Blog Sempre Altaneiro
+        &copy; <%= Date.current.year %> Blog Sempre Altaneiro — Blog independente.
       </p>
+      <p class="text-gray-600 text-xs uppercase tracking-widest">Feito por torcedores, para torcedores</p>
     </div>
   </div>
 </footer>
