@@ -18,8 +18,6 @@
         <% end %>
         <%= button_to "Sair", session_path, method: :delete,
               class: "text-black hover:text-red-600 transition-colors bg-transparent border-0 cursor-pointer text-xs font-semibold tracking-widest uppercase p-0" %>
-      <% else %>
-        <%= link_to "Entrar", new_session_path, class: "text-black hover:text-red-600 transition-colors" %>
       <% end %>
     </div>
   </div>

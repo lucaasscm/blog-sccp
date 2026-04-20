@@ -19,20 +19,17 @@
         </ul>
       </div>
 
-      <div>
-        <p class="text-red-600 text-xs font-semibold uppercase tracking-widest mb-4">Conta</p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <% if authenticated? %>
+      <% if authenticated? %>
+        <div>
+          <p class="text-red-600 text-xs font-semibold uppercase tracking-widest mb-4">Conta</p>
+          <ul class="space-y-2 text-sm text-gray-400">
             <li>
               <%= button_to "Sair", session_path, method: :delete,
                     class: "text-gray-400 hover:text-white transition-colors bg-transparent border-0 cursor-pointer text-sm p-0 text-left" %>
             </li>
-          <% else %>
-            <li><%= link_to "Entrar", new_session_path, class: "hover:text-white transition-colors" %></li>
-            <li><%= link_to "Criar conta", new_registration_path, class: "hover:text-white transition-colors" %></li>
-          <% end %>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      <% end %>
     </div>
 
     <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">

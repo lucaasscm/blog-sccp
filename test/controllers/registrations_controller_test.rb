@@ -3,6 +3,8 @@
 require "test_helper"
 
 class RegistrationsControllerTest < ActionDispatch::IntegrationTest
+  setup { skip "Rota /registration desativada pré-deploy (cadastro público fechado)" }
+
   test "new is accessible without authentication" do
     get new_registration_path
     assert_not response.redirect?

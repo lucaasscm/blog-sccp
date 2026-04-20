@@ -2,8 +2,11 @@
 
 Rails.application.routes.draw do
   resource :session
-  resource :registration, only: %i[new create]
-  resources :passwords, param: :token
+  # Cadastro público e reset de senha desativados até o mailer ser configurado.
+  # Rotas comentadas pra bloquear acesso por URL direta; o código dos controllers,
+  # views e PasswordsMailer permanece intacto pra reativar depois.
+  # resource :registration, only: %i[new create]
+  # resources :passwords, param: :token
 
   resources :posts, only: %i[index show] do
     resources :comments, only: %i[create edit update destroy]
