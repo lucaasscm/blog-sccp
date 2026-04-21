@@ -41,3 +41,11 @@
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+.post-body p {
+  margin-bottom: 1.25rem;
+}
+
+.post-body p:last-child {
+  margin-bottom: 0;
+}
