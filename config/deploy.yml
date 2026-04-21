@@ -84,8 +84,8 @@ builder:
   #   - GITHUB_TOKEN
   #   - RAILS_MASTER_KEY
 
-# Use a different ssh user than root
-# ssh:
-#   user: app
+# Use a different ssh user than root (Oracle Ubuntu images require SSH as `ubuntu`).
+ssh:
+  user: ubuntu
 
 # Accessories removidos: SQLite não precisa de DB server externo.
