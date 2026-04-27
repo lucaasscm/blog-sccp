@@ -17,8 +17,8 @@ Este projeto não nasceu para resolver um problema de negócio. Ele existe para 
 - **SQLite + Solid Trifecta** — banco, cache, filas e websockets sem Redis
 - **Hotwire** (Turbo + Stimulus) — reatividade sem SPA
 - **Tailwind CSS 4** — estilização
-- **AWS S3** — armazenamento de arquivos
-- **Kamal** — deploy via Docker em VPS própria
+- **Cloudflare R2** — armazenamento de arquivos
+- **Kamal** — deploy via Docker em VPS Oracle
 
 ## Funcionalidades
 
@@ -39,7 +39,7 @@ A aplicação sobe em `http://localhost:3000`.
 
 ## Deploy
 
-O deploy é feito via [Kamal](https://kamal-deploy.org) em uma VPS:
+O deploy é feito via [Kamal](https://kamal-deploy.org) em uma VPS Oracle:
 
 ```bash
 kamal deploy
