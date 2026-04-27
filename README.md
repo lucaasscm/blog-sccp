@@ -1,5 +1,7 @@
 # Blog Sempre Altaneiro
 
+**[blog-sempre-altaneiro.live](https://blog-sempre-altaneiro.live)**
+
 Um blog simples construído do zero — do código à produção — como campo de treino para dois objetivos: explorar o workflow de desenvolvimento com IA (Claude Code) e aprender na prática como subir uma aplicação Rails em um servidor real.
 
 ## Motivação
