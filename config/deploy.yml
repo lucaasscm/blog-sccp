@@ -7,7 +7,7 @@ image: lucaasscm/blog_coringao
 # Deploy to these servers.
 servers:
   web:
-    - 148.116.107.161
+    - <%= ENV["DEPLOY_SERVER"] %>
   # job:
   #   hosts:
   #     - 192.168.0.1
